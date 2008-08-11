@@ -20,8 +20,11 @@ Gem::Specification.new do |s|
   # list the files you want to include here. you can
   # check this manifest using 'rake :print_manifest'
   s.files = %W{
-    test/tap_test_helper.rb
-    test/tap_test_suite.rb
-    test/tapfile_test.rb
+    lib/xcalibur/convert/dta_to_mgf.rb
+    lib/xcalibur/convert/raw_to_dta.rb
+    lib/xcalibur/convert/raw_to_mgf.rb
+    lib/xcalibur/peak_file.rb
+    lib/xcalibur/peakify.rb
+    tap.yml
   }
 end

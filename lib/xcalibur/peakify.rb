@@ -1,7 +1,6 @@
-require 'xcalibur/export/peak_file'
+require 'xcalibur/peak_file'
 
 module Xcalibur
-  module Export
     # :startdoc::manifest adds graph data to an exported peak file
     # Peakify adds points to signify the relative intensity 
     # (ie the rounded intensity/max_intensity) of peaks in 
@@ -63,5 +62,4 @@ module Xcalibur
       end
       
     end
-  end
 end

@@ -1,8 +1,8 @@
-require File.join(File.dirname(__FILE__), '../../tap_test_helper.rb') 
-require 'xcalibur/export/peak_file'
+require File.join(File.dirname(__FILE__), '../tap_test_helper.rb') 
+require 'xcalibur/peak_file'
 
-class Xcalibur::Export::PeakFileTest < Test::Unit::TestCase
-  include Xcalibur::Export
+class Xcalibur::PeakFileTest < Test::Unit::TestCase
+  include Xcalibur
   
   #
   # initialize test

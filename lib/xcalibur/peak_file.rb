@@ -1,6 +1,4 @@
 module Xcalibur
-  module Export
-  
     # A simple representation of a peak file exported from Xcalibur Qual 
     # Browser (v 2.0).  The expected format of a peak file is as shown below:
     #
@@ -90,5 +88,4 @@ module Xcalibur
       end
       
     end
-  end
 end
