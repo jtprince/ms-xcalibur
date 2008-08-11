@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   #s.rubyforge_project = "xcalibur"
   s.has_rdoc = true
   s.add_dependency("tap", "~> 0.10.0")
+  s.add_dependency("constants", "~> 0.1.0")
   
   # list extra rdoc files like README here.
   s.extra_rdoc_files = %W{
