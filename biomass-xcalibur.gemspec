@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
-  s.name = "xcalibur"
+  s.name = "biomass-xcalibur"
   s.version = "0.0.1"
   s.author = "Simon Chiang"
   s.email = "simon.a.chiang@gmail.com"
-  s.homepage = "http://hsc-proteomics.uchsc.edu/"
+  s.homepage = "http://github.com/bahuvrihi/biomass-xcalibur/wikis"
   s.platform = Gem::Platform::RUBY
   s.summary = "xcalibur task library"
   s.require_path = "lib"
   s.test_file = "test/tap_test_suite.rb"
-  #s.rubyforge_project = "xcalibur"
+  s.rubyforge_project = "bioactive"
   s.has_rdoc = true
   s.add_dependency("tap", "~> 0.10.0")
   s.add_dependency("constants", "~> 0.1.0")
