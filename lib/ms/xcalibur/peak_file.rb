@@ -1,4 +1,5 @@
-module Xcalibur
+module MS
+  module Xcalibur
     # A simple representation of a peak file exported from Xcalibur Qual 
     # Browser (v 2.0).  The expected format of a peak file is as shown below:
     #
@@ -20,9 +21,9 @@ module Xcalibur
     # description.
     #
     class PeakFile
-      
+
       class << self
-        
+
         # Parses the input string into a PeakFile
         def parse(str)
           peak_file = PeakFile.new
@@ -30,7 +31,7 @@ module Xcalibur
           str.each_line do |line|
             case mode
             when :header
-            
+
               case line
               when /^(.*?): (.*)$/
                 peak_file.headers[$1] = $2
@@ -39,16 +40,16 @@ module Xcalibur
               else
                 peak_file.desc << line.strip
               end
-            
+
             when :data
               peak_file.data << line.split(/\s/).collect {|mz| mz.to_f }
             end
           end
-          
+
           peak_file
         end
       end
-      
+
       # The order of headers observed in export files
       HEADER_ORDER = [
         "Scan #",
@@ -56,22 +57,22 @@ module Xcalibur
         "Mass defect",
         "Data points"
       ]
-      
+
       # An array of description lines
       attr_accessor :desc
-      
+
       # A hash of headers
       attr_accessor :headers
-      
+
       # An array of (mz, intensity) values
       attr_accessor :data
-      
+
       def initialize(desc=[], headers={}, data=[])
         @desc = desc
         @headers = headers
         @data = data
       end
-      
+
       # Recreates the peak file
       def to_s(sep="\r\n")
         lines = desc + 
@@ -83,9 +84,9 @@ module Xcalibur
         data.collect do |point|
           point.join("\t")
         end
-        
+
         lines.join(sep) + sep
       end
-      
     end
+  end
 end

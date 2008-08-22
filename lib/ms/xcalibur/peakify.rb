@@ -1,6 +1,7 @@
-require 'xcalibur/peak_file'
+require 'ms/xcalibur/peak_file'
 
-module Xcalibur
+module MS
+  module Xcalibur
     # :startdoc::manifest adds graph data to an exported peak file
     # Peakify adds points to signify the relative intensity 
     # (ie the rounded intensity/max_intensity) of peaks in 
@@ -24,7 +25,7 @@ module Xcalibur
     # peak lists from Xcalibur Qual  Browser (v 2.0).
     #
     class Peakify < Tap::FileTask
-    
+
       config :point_char, '.'           # a character used for each intensity point
       config :min, 0, &c.num            # min relative intenisty
       config :max, 100, &c.num          # max relative intenisty
@@ -33,33 +34,33 @@ module Xcalibur
       def process(filepath)
         target = app.filepath(:data, "peak_#{File.basename(filepath)}" )
         prepare(target) 
-        
+
         # now perform the task...
         peak_file = PeakFile.parse File.read(filepath)
         max_intensity = peak_file.data.inject(0) do |max, (mz, intensity)|
           intensity > max ? intensity : max
         end
-        
+
         range = min..max
         peak_file.data = peak_file.data.collect do |(mz, intensity)|
           percent = (intensity / max_intensity * 100)
           next unless range.include?(percent)
-          
+
           [mz, intensity, point_char * percent.round]
         end.compact
-        
+
         if sort
           peak_file.data = peak_file.data.sort_by do |(mz, intensity)|
             intensity
           end.reverse
         end
-        
+
         File.open(target, "wb") do |file|
           file << peak_file.to_s
         end
-        
+
         target
       end
-      
     end
+  end
 end

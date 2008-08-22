@@ -1,7 +1,7 @@
-require File.join(File.dirname(__FILE__), '../../tap_test_helper.rb') 
-require 'xcalibur/convert/raw_to_mgf'
+require File.join(File.dirname(__FILE__), '../../../tap_test_helper.rb') 
+require 'ms/xcalibur/convert/raw_to_mgf'
 
-class Xcalibur::Convert::RawToMgfTest < Test::Unit::TestCase
+class RawToMgfTest < Test::Unit::TestCase
   acts_as_tap_test :directories => {:data => 'output'}
   
   unless match_platform?("mswin")
@@ -9,7 +9,7 @@ class Xcalibur::Convert::RawToMgfTest < Test::Unit::TestCase
   end
   
   def test_raw_to_mgf
-    t = Xcalibur::Convert::RawToMgf.new :merge_file => method_filepath(:output, "merge.mgf")
+    t = MS::Xcalibur::Convert::RawToMgf.new :merge_file => method_filepath(:output, "merge.mgf")
 
     assert_files do |input_files| 
       t.enq(*input_files)

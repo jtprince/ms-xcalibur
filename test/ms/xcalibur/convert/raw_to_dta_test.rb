@@ -1,7 +1,7 @@
-require File.join(File.dirname(__FILE__), '../../tap_test_helper.rb') 
-require 'xcalibur/convert/raw_to_dta'
+require File.join(File.dirname(__FILE__), '../../../tap_test_helper.rb') 
+require 'ms/xcalibur/convert/raw_to_dta'
 
-class Xcalibur::Convert::RawToDtaTest < Test::Unit::TestCase
+class RawToDtaTest < Test::Unit::TestCase
   acts_as_tap_test :directories => {:output => 'output'}
   
   unless match_platform?("mswin")
@@ -9,14 +9,14 @@ class Xcalibur::Convert::RawToDtaTest < Test::Unit::TestCase
   end
   
   condition(:extract_msn_exists) do 
-    File.exists? Xcalibur::Convert::RawToDta.configurations[:extract_msn].default
+    File.exists? MS::Xcalibur::Convert::RawToDta.configurations[:extract_msn].default
   end
   
   attr_accessor :t
   
   def setup
     super
-    @t = Xcalibur::Convert::RawToDta.new 
+    @t = MS::Xcalibur::Convert::RawToDta.new 
   end
   
   #

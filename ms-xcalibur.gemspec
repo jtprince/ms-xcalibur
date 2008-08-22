@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
-  s.name = "biomass-xcalibur"
+  s.name = "ms-xcalibur"
   s.version = "0.0.1"
   s.author = "Simon Chiang"
   s.email = "simon.a.chiang@gmail.com"
-  s.homepage = "http://github.com/bahuvrihi/biomass-xcalibur/wikis"
+  s.homepage = "http://github.com/bahuvrihi/ms-xcalibur/wikis"
   s.platform = Gem::Platform::RUBY
   s.summary = "xcalibur task library"
   s.require_path = "lib"
@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
   # list the files you want to include here. you can
   # check this manifest using 'rake :print_manifest'
   s.files = %W{
-    lib/xcalibur/convert/dta_to_mgf.rb
-    lib/xcalibur/convert/raw_to_dta.rb
-    lib/xcalibur/convert/raw_to_mgf.rb
-    lib/xcalibur/peak_file.rb
-    lib/xcalibur/peakify.rb
+    lib/ms/xcalibur/convert/dta_to_mgf.rb
+    lib/ms/xcalibur/convert/raw_to_dta.rb
+    lib/ms/xcalibur/convert/raw_to_mgf.rb
+    lib/ms/xcalibur/peak_file.rb
+    lib/ms/xcalibur/peakify.rb
     tap.yml
   }
 end
