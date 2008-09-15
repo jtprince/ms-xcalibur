@@ -7,13 +7,9 @@ class PeakifyTest < Test::Unit::TestCase
   def test_peakify
     t = MS::Xcalibur::Peakify.new 
     assert_files do |input_files|
-      input_files.each {|file| t.enq(file)}
-      
-      with_config :directories => {:data => 'output'} do 
-        app.run
+      input_files.collect do |file| 
+        t.process(file, method_root.translate(file, :input, :output))
       end
-      
-      app.results(t)
     end
   end
   

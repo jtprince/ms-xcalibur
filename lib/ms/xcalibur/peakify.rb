@@ -31,12 +31,11 @@ module MS
       config :max, 100, &c.num          # max relative intenisty
       config :sort, false, &c.flag      # sort by intensity
 
-      def process(filepath)
-        target = app.filepath(:data, "peak_#{File.basename(filepath)}" )
-        prepare(target) 
+      def process(source, target=basepath(source, 'peaks.txt'))
+        prepare(target)
 
         # now perform the task...
-        peak_file = PeakFile.parse File.read(filepath)
+        peak_file = PeakFile.parse File.read(source)
         max_intensity = peak_file.data.inject(0) do |max, (mz, intensity)|
           intensity > max ? intensity : max
         end

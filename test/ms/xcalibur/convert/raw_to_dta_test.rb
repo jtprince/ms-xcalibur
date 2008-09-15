@@ -48,7 +48,7 @@ class RawToDtaTest < Test::Unit::TestCase
   def test_raw_to_dta_with_default_options
     condition_test(:extract_msn_exists) do
       assert_files do |x|
-        t.process(input_file, method_dir(:output))
+        t.process(input_file, method_root[:output])
       end
     end
   end
@@ -58,7 +58,7 @@ class RawToDtaTest < Test::Unit::TestCase
       t.lower_MW = 1500
       
       assert_files do |x|
-        t.process(input_file, method_dir(:output))
+        t.process(input_file, method_root[:output])
       end
     end
   end

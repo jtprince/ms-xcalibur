@@ -34,7 +34,7 @@ module MS
 
               case line
               when /^(.*?): (.*)$/
-                peak_file.headers[$1] = $2
+                peak_file.headers[$1] = $2.strip
               when /Mass\sIntensity/
                 mode = :data
               else
