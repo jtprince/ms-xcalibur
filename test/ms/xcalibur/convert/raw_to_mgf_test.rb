@@ -12,9 +12,8 @@ class RawToMgfTest < Test::Unit::TestCase
     t = MS::Xcalibur::Convert::RawToMgf.new :merge_file => method_root.filepath(:output, "merge.mgf")
 
     assert_files do |input_files| 
-      t.enq(*input_files)
-      app.run
-      app.results(t.exit_point)
+      t.process(*input_files)
+      app.results(t.dta_to_mgf)
     end
   end
   

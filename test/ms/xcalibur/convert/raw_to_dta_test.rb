@@ -42,7 +42,7 @@ class RawToDtaTest < Test::Unit::TestCase
   #
   
   def input_file
-    trs.filepath(:root, "T29K_620.9@cid33_080703140516.raw")
+    ctr.filepath(:root, "T29K_620.9@cid33_080703140516.raw")
   end
   
   def test_raw_to_dta_with_default_options

@@ -74,7 +74,7 @@ PEPMASS=#{(mh + (z-1) * h)/ z}
 #{lines.join("\n")}
 END IONS
 
-              }
+}
             end
           end
           log(:made, output_file)
