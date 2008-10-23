@@ -9,14 +9,14 @@ class RawToDtaTest < Test::Unit::TestCase
   end
   
   condition(:extract_msn_exists) do 
-    File.exists? MS::Xcalibur::Convert::RawToDta.configurations[:extract_msn].default
+    File.exists? Ms::Xcalibur::Convert::RawToDta.configurations[:extract_msn].default
   end
   
   attr_accessor :t
   
   def setup
     super
-    @t = MS::Xcalibur::Convert::RawToDta.new 
+    @t = Ms::Xcalibur::Convert::RawToDta.new 
   end
   
   #

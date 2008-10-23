@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), '../../tap_test_helper.rb')
 require 'ms/xcalibur/peak_file'
 
 class PeakFileTest < Test::Unit::TestCase
-  include MS::Xcalibur
+  include Ms::Xcalibur
   
   #
   # initialize test

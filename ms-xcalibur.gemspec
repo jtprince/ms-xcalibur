@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.test_file = "test/tap_test_suite.rb"
   s.rubyforge_project = "bioactive"
   s.has_rdoc = true
-  s.add_dependency("tap", "~> 0.10.0")
-  s.add_dependency("constants", "~> 0.1.0")
+  s.add_dependency("tap", "~> 0.11")
+  s.add_dependency("constants", "~> 0.1")
   
   # list extra rdoc files like README here.
   s.extra_rdoc_files = %W{

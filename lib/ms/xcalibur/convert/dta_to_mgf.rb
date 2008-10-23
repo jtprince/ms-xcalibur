@@ -1,6 +1,6 @@
 require 'constants'
 
-module MS
+module Ms
   module Xcalibur
     module Convert
       # :startdoc::manifest convert dta files to mgf format

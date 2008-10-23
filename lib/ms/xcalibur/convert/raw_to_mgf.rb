@@ -1,7 +1,7 @@
 require 'ms/xcalibur/convert/raw_to_dta'
 require 'ms/xcalibur/convert/dta_to_mgf'
 
-module MS
+module Ms
   module Xcalibur
     module Convert
       # :startdoc::manifest convert RAW files to mgf format

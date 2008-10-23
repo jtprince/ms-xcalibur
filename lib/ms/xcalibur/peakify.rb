@@ -1,6 +1,6 @@
 require 'ms/xcalibur/peak_file'
 
-module MS
+module Ms
   module Xcalibur
     # :startdoc::manifest adds graph data to an exported peak file
     # Peakify adds points to signify the relative intensity 

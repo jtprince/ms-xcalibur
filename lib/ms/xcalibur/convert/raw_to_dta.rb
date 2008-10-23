@@ -1,4 +1,4 @@
-module MS
+module Ms
   module Xcalibur
     module Convert
       # :startdoc::manifest convert RAW files to dta format
