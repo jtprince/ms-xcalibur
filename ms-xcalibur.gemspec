@@ -1,20 +1,20 @@
 Gem::Specification.new do |s|
   s.name = "ms-xcalibur"
-  s.version = "0.0.1"
+  s.version = "0.1.0"
   s.author = "Simon Chiang"
   s.email = "simon.a.chiang@gmail.com"
-  s.homepage = "http://github.com/bahuvrihi/ms-xcalibur/wikis"
+  s.homepage = "http://mspire.rubyforge.org/projects/ms-xcalibur/"
   s.platform = Gem::Platform::RUBY
-  s.summary = "xcalibur task library"
+  s.summary = "An Mspire library supporting Xcalibur."
   s.require_path = "lib"
-  s.test_file = "test/tap_test_suite.rb"
-  s.rubyforge_project = "bioactive"
+  s.rubyforge_project = "mspire"
   s.has_rdoc = true
-  s.add_dependency("tap", "~> 0.11")
-  s.add_dependency("constants", "~> 0.1")
+  s.add_dependency("tap", ">= 0.11")
+  s.add_dependency("constants", ">= 0.1")
   
   # list extra rdoc files like README here.
   s.extra_rdoc_files = %W{
+    README
     MIT-LICENSE
   }
   

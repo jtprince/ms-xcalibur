@@ -1,0 +1,22 @@
+= {Ms-Xcalibur}[http://mspire.rubyforge.org/projects/ms-xcalibur]
+
+An {Mspire}[http://mspire.rubyforge.org] library supporting {Xcalibur}[http://www.thermo.com/com/cda/product/detail/1,,1000001009250,00.html].
+
+== Description
+
+* Lighthouse[http://bahuvrihi.lighthouseapp.com/projects/16692-mspire/tickets]
+* Github[http://github.com/bahuvrihi/ms-xcalibur/tree/master]
+* {Google Group}[http://groups.google.com/group/mspire-forum]
+
+== Installation
+
+Ms-Xcalibur is available as a gem on RubyForge[http://rubyforge.org/projects/mspire].  Use:
+
+  % gem install ms-xcalibur
+
+== Info 
+
+Copyright (c) 2006-2008, Regents of the University of Colorado.
+Developer:: {Simon Chiang}[http://bahuvrihi.wordpress.com], {Biomolecular Structure Program}[http://biomol.uchsc.edu/], {Hansen Lab}[http://hsc-proteomics.uchsc.edu/hansenlab/] 
+Support:: CU Denver School of Medicine Deans Academic Enrichment Fund
+Licence:: {MIT-Style}[link:files/MIT-LICENSE.html]
