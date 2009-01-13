@@ -42,9 +42,9 @@ module Ms
           group_results = []
           raw_to_dta.on_complete do |_result|
             if merge_individual
-              input_file = _result._original[0]
+              input_file = _result.sources[0].value
               output_file = File.join( File.dirname(merge_file), File.basename(input_file).chomp(File.extname(input_file)) + ".mgf")
-              dta_to_mgf.execute(output_file, *_result._iterate)
+              dta_to_mgf.execute(output_file, *_result.splat)
             end
 
             # collect _results to determine when all the input
@@ -55,7 +55,7 @@ module Ms
             # group and enque a task to cleanup the dta files, as specified.
             if group_results.length == @n_inputs
               if merge_group
-                all_results = group_results.collect {|_result| _result._iterate }.flatten
+                all_results = group_results.collect {|_result| _result.splat }.flatten
                 dta_to_mgf.execute(merge_file, *all_results)
               end
             end

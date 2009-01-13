@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.require_path = "lib"
   s.rubyforge_project = "mspire"
   s.has_rdoc = true
-  s.add_dependency("tap", ">= 0.11")
+  s.add_dependency("tap", ">= 0.12")
   s.add_dependency("constants", ">= 0.1")
   
   # list extra rdoc files like README here.
