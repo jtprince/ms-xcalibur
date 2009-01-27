@@ -14,24 +14,24 @@ module Ms
       #
       class RawToDta < Tap::FileTask
         config :extract_msn, 'C:\Xcalibur\System\Programs\extract_msn.exe' # the full path to the extract_msn executable
-        config :first_scan, nil, &c.integer_or_nil              # (-F)
-        config :last_scan, nil, &c.integer_or_nil               # (-L)
-        config :lower_MW, nil, &c.num_or_nil                    # (-B)
-        config :upper_MW, nil, &c.num_or_nil                    # (-T)
-        config :precursor_mass_tol, 1.4, &c.num                 # (-M)
-        config :num_allowed_intermediate_scans_for_grouping, 1, &c.integer # (-S)
-        config :charge_state, nil, &c.integer_or_nil            # (-C)
-        config :num_required_group_scans, 1, &c.integer_or_nil  # (-G)
-        config :num_ions_required, 0, &c.integer_or_nil         # (-I)
-        config :intensity_threshold, nil, &c.integer_or_nil     # (-E)
-        config :use_unified_search_file, nil, &c.flag           # (-U)
-        config :subsequence, nil                                # (-Y)
-        config :write_zta_files, nil, &c.flag                   # (-Z)
-        config :perform_charge_calculations, nil, &c.flag       # (-K)
-        config :template_file, nil                              # (-O)
-        config :options_string, nil                             # (-A)
-        config :minimum_signal_to_noise, 3, &c.num              # (-R)
-        config :minimum_number_of_peaks, 5, &c.integer          # (-r)
+        config :first_scan, nil, :short => :F, &c.integer_or_nil
+        config :last_scan, nil, :short => :L, &c.integer_or_nil
+        config :lower_MW, nil, :short => :B, &c.num_or_nil
+        config :upper_MW, nil, :short => :T, &c.num_or_nil
+        config :precursor_mass_tol, 1.4, :short => :M, &c.num
+        config :num_allowed_intermediate_scans_for_grouping, 1, :short => :S, &c.integer
+        config :charge_state, nil, :short => :C, &c.integer_or_nil
+        config :num_required_group_scans, 1, :short => :G, &c.integer_or_nil
+        config :num_ions_required, 0, :short => :I, &c.integer_or_nil
+        config :intensity_threshold, nil, :short => :E, &c.integer_or_nil
+        config :use_unified_search_file, nil, :short => :U, &c.flag
+        config :subsequence, nil, :short => :Y
+        config :write_zta_files, nil, :short => :Z, &c.flag
+        config :perform_charge_calculations, nil, :short => :K, &c.flag
+        config :template_file, nil, :short => :O
+        config :options_string, nil, :short => :A
+        config :minimum_signal_to_noise, 3, :short => :R, &c.num
+        config :minimum_number_of_peaks, 5, :short => :r, &c.integer
 
         config_attr(:extract_msn_help, nil, :arg_type => :flag) do |value|  # Print the extract_msn help         
           if value
