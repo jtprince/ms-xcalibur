@@ -37,25 +37,26 @@ module Ms
         # Returns the unrounded mass of a proton (H - e) as calculated
         # from the {constants}[bioactive.rubyforge.org/constants] gem.
         config :proton_mass, Element['H'].mass - Particle['Electron'].mass, &c.num_or_nil        # allows specification of an alternate proton mass
-
-        def process(output_file, *inputs)
-          return output_file if inputs.empty?
-
-          dta_files = inputs.collect do |file| 
-            if File.directory?(file)
-              Dir.glob(File.expand_path(File.join(file, "*.dta")))
-            else
-              raise "Not a .dta file: #{file}" unless file =~ /\.(dta)$/
-              file
-            end
-          end
-
-          prepare(output_file) 
-          File.open(output_file, "wb") do |target|
-            h = proton_mass
-
-            dta_files.flatten.each do |file|
-              #log_basename(:merging, file)
+        config :output, $stdout, :reader => false
+        
+        def output(mode='r')
+          case @output
+          when String
+            prepare(@output)
+            File.open(@output, mode) {|io| yield(io) }
+          else 
+            yield(@output)
+          end if block_given?
+          @output
+        end
+        
+        def process(*dta_files)
+          output('w') do |target|
+            target.binmode
+            
+            log :convert, "#{dta_files.length} dta files"
+            dta_files.each do |file|
+              check_terminate
               lines = File.read(file).split(/\r?\n/)
 
               # get the mh and z
@@ -70,19 +71,15 @@ module Ms
               target << %Q{BEGIN IONS
 TITLE=#{File.basename(file)}
 CHARGE=#{z}+
-PEPMASS=#{(mh + (z-1) * h)/ z}
+PEPMASS=#{(mh + (z-1) * proton_mass)/ z}
 #{lines.join("\n")}
 END IONS
 
 }
             end
           end
-          log(:made, output_file)
-
-          output_file
         end
       end
-      
     end
   end
 end

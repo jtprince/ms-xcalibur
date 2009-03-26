@@ -7,8 +7,9 @@ class DtaToMgfTest < Test::Unit::TestCase
   def test_dta_to_mgf
     t = Ms::Xcalibur::Convert::DtaToMgf.new 
     
-    assert_files do |input_files| 
-      t.execute(method_root.filepath(:output, "output.mgf"), *input_files)
+    assert_files do |input_files|
+      t.output = method_root.filepath(:output, "output.mgf")
+      t.process(*input_files)
     end
   end
   

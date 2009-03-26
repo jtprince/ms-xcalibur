@@ -32,7 +32,8 @@ module Ms
         config :options_string, nil, :short => :A
         config :minimum_signal_to_noise, 3, :short => :R, &c.num
         config :minimum_number_of_peaks, 5, :short => :r, &c.integer
-
+        config :output_dir, nil, &c.string_or_nil
+        
         config_attr(:extract_msn_help, nil, :arg_type => :flag) do |value|  # Print the extract_msn help         
           if value
             sh(extract_msn)
@@ -114,29 +115,44 @@ module Ms
           args.join(' ')
         end
 
-        def process(input_file, output_dir=nil)
+        def process(input_file)
           extname = File.extname(input_file)
           raise "Expected .RAW file: #{input_file}" unless  extname =~ /\.RAW$/i
 
           # Target the output to a directory with the same basename 
           # as the raw file, unless otherwise specified.
-          output_dir = input_file.chomp(File.extname(input_file)) if output_dir == nil
-
-          mkdir(output_dir)
-          command = cmd(input_file, output_dir)
-
-          log :sh, command
-          if app.quiet
-            capture_sh(command, true)
+          output_dir = self.output_dir || input_file.chomp(File.extname(input_file))
+          current_dta_files = dta_files(output_dir)
+          if uptodate?(current_dta_files, input_file)
+            log_basename :uptodate, input_file
+            current_dta_files
           else
-            sh(command)
-            puts ""  # add extra line to make logging nice
-          end
+            mkdir(output_dir)
+            command = cmd(input_file, output_dir)
 
-          # This may select additional .dta files that existed before raw_to_dta
-          # TODO - maybe read lcq_dta for files? 
-          Dir.glob( File.expand_path(File.join(output_dir, "*.dta")) ) 
+            log :sh, command
+            if app.quiet
+              capture_sh(command, true)
+            else
+              sh(command)
+              puts ""  # add extra line to make logging nice
+            end
+            
+            dta_files(output_dir)
+          end
         end
+        
+        def dta_files(output_dir)
+          lcq_dta = File.join(output_dir, 'lcq_dta.txt')
+          
+          dta_files = []
+          File.read(lcq_dta).scan(/Datafile:\s(.*?\.dta)\s/) do |dta_file|
+            dta_files << File.join(output_dir, dta_file)
+          end if File.exists?(lcq_dta)
+          
+          dta_files
+        end
+        
       end
     end
   end
