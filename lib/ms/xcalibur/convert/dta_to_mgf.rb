@@ -3,9 +3,20 @@ require 'constants'
 module Ms
   module Xcalibur
     module Convert
+      
       # :startdoc::manifest convert dta files to mgf format
-      # Converts a set of .dta files (Sequest format) into an .mgf (Mascot format) 
-      # file.  The conversion is straightforward.  
+      #
+      # Converts a set of dta files (Sequest format) into an mgf (Mascot format) 
+      # file.  By default the mgf file is printed to $stdout, so redirection is
+      # a good way to save the results.
+      #
+      #   % tap run -- dta_to_mgf ... > results.mgf
+      #
+      # Alternatively, specify the output file using the output configuration.
+      #
+      # === Conversion
+      #
+      # The dta -> mgf conversion is straightforward:
       #
       # dta format:
       #   [input_file.dta]
@@ -36,22 +47,12 @@ module Ms
 
         # Returns the unrounded mass of a proton (H - e) as calculated
         # from the {constants}[bioactive.rubyforge.org/constants] gem.
-        config :proton_mass, Element['H'].mass - Particle['Electron'].mass, &c.num_or_nil        # allows specification of an alternate proton mass
-        config :output, $stdout, :reader => false
-        
-        def output(mode='r')
-          case @output
-          when String
-            prepare(@output)
-            File.open(@output, mode) {|io| yield(io) }
-          else 
-            yield(@output)
-          end if block_given?
-          @output
-        end
+        config :proton_mass, Element['H'].mass - Particle['Electron'].mass, &c.num_or_nil # Specify the proton mass
+        config :output, $stdout, &c.io(:<<, :binmode) # The output file
         
         def process(*dta_files)
-          output('w') do |target|
+          prepare(output) if output.kind_of?(String)
+          open_io(output, 'w') do |target|
             target.binmode
             
             log :convert, "#{dta_files.length} dta files"

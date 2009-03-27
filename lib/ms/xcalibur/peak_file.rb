@@ -3,7 +3,7 @@ module Ms
     # A simple representation of a peak file exported from Xcalibur Qual 
     # Browser (v 2.0).  The expected format of a peak file is as shown below:
     #
-    #  [peak_file.txt]
+    #   [peak_file.txt]
     #   SPECTRUM - MS
     #   GSE_T29K_080703143635.raw
     #   ITMS + c ESI Full ms [300.00-2000.00]

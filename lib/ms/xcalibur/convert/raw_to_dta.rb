@@ -1,19 +1,34 @@
 module Ms
   module Xcalibur
     module Convert
+      
       # :startdoc::manifest convert RAW files to dta format
-      # Converts a .RAW file to dta files using extract_msn.exe 
       #
-      # extract_msn.exe is an Xcalibur/BioWorks tool that extracts spectra from .RAW
-      # files into .dta (Sequest) format and must be installed for RawToDta to work.
-      # RawToDta was developed against extract_msn version 4.0.  You can check if
-      # extract_msn is installed at the default location, as well as determine the  
-      # version of your executable using:
+      # Converts a RAW file to dta files using extract_msn.exe.  Returns an
+      # array of the output dta files.  By default extracted files are put
+      # in a directory named after the RAW file, but an alternate extraction
+      # directory can be specified iwth the output-dir option.
       #
-      #   % tap run -- xcalibur/convert/raw_to_dta  --extract_msn_help
+      # RawToDta will skip extraction of an 'lcq_dta.txt' file and all the dta
+      # files listed therein exist in the output directory.  This is good in
+      # most cases; if you want to force execution set force true for the run:
+      #
+      #   % tap run --force -- raw_to_dta ...
+      #
+      # === extract_msn
+      #
+      # extract_msn.exe is an Xcalibur/BioWorks tool that extracts spectra from
+      # RAW files into dta (Sequest) format and must be installed for RawToDta
+      # to work.  At present this means that RawToDta can only work on Windows.
+      #
+      # RawToDta was developed against extract_msn version 4.0.  You can check
+      # if extract_msn is installed at the default location, as well as
+      # determine the version of your executable using:
+      #
+      #   % tap run -- raw_to_dta  --extract_msn_help
       #
       class RawToDta < Tap::FileTask
-        config :extract_msn, 'C:\Xcalibur\System\Programs\extract_msn.exe' # the full path to the extract_msn executable
+        config :extract_msn, 'C:\Xcalibur\System\Programs\extract_msn.exe' # The full path to the extract_msn executable
         config :first_scan, nil, :short => :F, &c.integer_or_nil
         config :last_scan, nil, :short => :L, &c.integer_or_nil
         config :lower_MW, nil, :short => :B, &c.num_or_nil
@@ -32,8 +47,8 @@ module Ms
         config :options_string, nil, :short => :A
         config :minimum_signal_to_noise, 3, :short => :R, &c.num
         config :minimum_number_of_peaks, 5, :short => :r, &c.integer
-        config :output_dir, nil, &c.string_or_nil
         
+        config :output_dir, nil, &c.string_or_nil # The output directory
         config_attr(:extract_msn_help, nil, :arg_type => :flag) do |value|  # Print the extract_msn help         
           if value
             sh(extract_msn)
@@ -123,10 +138,14 @@ module Ms
           # as the raw file, unless otherwise specified.
           output_dir = self.output_dir || input_file.chomp(File.extname(input_file))
           current_dta_files = dta_files(output_dir)
-          if uptodate?(current_dta_files, input_file)
+          if !current_dta_files.empty? && uptodate?(current_dta_files, input_file)
             log_basename :uptodate, input_file
             current_dta_files
           else
+            unless File.exists?(extract_msn)
+              raise "extract_msn does not exist at: #{extract_msn}"
+            end
+            
             mkdir(output_dir)
             command = cmd(input_file, output_dir)
 
@@ -142,6 +161,10 @@ module Ms
           end
         end
         
+        # Returns an array of dta_files specified in the lcq_dta.txt file under
+        # output_dir.  A simple glob is less preferable than reading the list of
+        # files from lcq_dta because there is no guarantee all the .dta file in
+        # the output directory should be used for a particular file.
         def dta_files(output_dir)
           lcq_dta = File.join(output_dir, 'lcq_dta.txt')
           
