@@ -1,0 +1,8 @@
+== 0.2.0 / 2009-03-31
+
+Updated release to use latest tap.  Removed
+raw_to_mgf task as it can be performed using
+existing tasks.
+
+* removed RawToMgf
+* updated tasks

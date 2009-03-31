@@ -8,6 +8,14 @@ An {Mspire}[http://mspire.rubyforge.org] library supporting {Xcalibur}[http://ww
 * Github[http://github.com/bahuvrihi/ms-xcalibur/tree/master]
 * {Google Group}[http://groups.google.com/group/mspire-forum]
 
+== Usage
+
+Currently the primary use of Ms-Xcalibur is to convert RAW files to dta files.  Use this workflow to do so:
+
+  % tap run -- raw_to_dta RAW_FILE --:s dta_to_mgf > MGF_FILE
+
+The extract_msn.exe tool provided by Xcalibur/BioWorks must already be installed.
+
 == Installation
 
 Ms-Xcalibur is available as a gem on RubyForge[http://rubyforge.org/projects/mspire].  Use:
