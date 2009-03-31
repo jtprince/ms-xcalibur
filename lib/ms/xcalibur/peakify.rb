@@ -35,7 +35,8 @@ module Ms
       def process(source)
         prepare(output) if output.kind_of?(String)
         open_io(output, 'w') do |target|
-
+          target.binmode
+          
           # now perform the task...
           peak_file = PeakFile.parse File.read(source)
           max_intensity = peak_file.data.inject(0) do |max, (mz, intensity)|
