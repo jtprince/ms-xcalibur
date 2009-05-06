@@ -1,8 +1,10 @@
+require 'tap/tasks/file_task'
+
 module Ms
   module Xcalibur
     module Convert
       
-      # :startdoc::manifest convert RAW files to dta format
+      # :startdoc::task convert RAW files to dta format
       #
       # Converts a RAW file to dta files using extract_msn.exe.  Returns an
       # array of the output dta files.  By default extracted files are put
@@ -27,7 +29,7 @@ module Ms
       #
       #   % tap run -- raw_to_dta  --extract_msn_help
       #
-      class RawToDta < Tap::FileTask
+      class RawToDta < Tap::Tasks::FileTask
         config :extract_msn, 'C:\Xcalibur\System\Programs\extract_msn.exe' # The full path to the extract_msn executable
         config :first_scan, nil, :short => :F, &c.integer_or_nil
         config :last_scan, nil, :short => :L, &c.integer_or_nil

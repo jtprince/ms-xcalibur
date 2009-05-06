@@ -1,3 +1,7 @@
+== 0.3.0 / 2009-05-06
+
+* updates to use tap-0.17.0
+
 == 0.2.0 / 2009-03-31
 
 Updated release to use latest tap.  Removed

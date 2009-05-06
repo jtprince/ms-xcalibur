@@ -1,10 +1,11 @@
+require 'tap/tasks/file_task'
 require 'constants'
 
 module Ms
   module Xcalibur
     module Convert
       
-      # :startdoc::manifest convert dta files to mgf format
+      # :startdoc::task convert dta files to mgf format
       #
       # Converts a set of dta files (Sequest format) into an mgf (Mascot format) 
       # file.  By default the mgf file is printed to $stdout, so redirection is
@@ -42,7 +43,7 @@ module Ms
       # calculated from the {constants}[bioactive.rubyforge.org/constants] gem to be 
       # ~ 1.007276 Da
       #
-      class DtaToMgf < Tap::FileTask
+      class DtaToMgf < Tap::Tasks::FileTask
         include Constants::Libraries
 
         # Returns the unrounded mass of a proton (H - e) as calculated
@@ -57,7 +58,7 @@ module Ms
             
             log :convert, "#{dta_files.length} dta files"
             dta_files.each do |file|
-              check_terminate
+              app.check_terminate
               lines = File.read(file).split(/\r?\n/)
 
               # get the mh and z
@@ -79,6 +80,7 @@ END IONS
 }
             end
           end
+          output
         end
       end
     end

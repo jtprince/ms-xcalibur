@@ -1,8 +1,9 @@
+require 'tap/tasks/file_task'
 require 'ms/xcalibur/peak_file'
 
 module Ms
   module Xcalibur
-    # :startdoc::manifest adds graph data to an exported peak file
+    # :startdoc::task adds graph data to an exported peak file
     #
     # Peakify adds points to signify the relative intensity (ie the rounded
     # intensity/max_intensity) of peaks to a peak list extracted from Xcalibur
@@ -24,7 +25,7 @@ module Ms
     # Options can be specified to filter out points within a range of relative
     # intensities.
     #
-    class Peakify < Tap::FileTask
+    class Peakify < Tap::Tasks::FileTask
 
       config :point_char, '.'                          # A character used for each intensity point
       config :min, 0, &c.num                           # Min relative intenisty
@@ -59,6 +60,7 @@ module Ms
 
           target << peak_file.to_s
         end
+        output
       end
     end
   end

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "ms-xcalibur"
-  s.version = "0.2.0"
+  s.version = "0.3.0"
   s.author = "Simon Chiang"
   s.email = "simon.a.chiang@gmail.com"
   s.homepage = "http://mspire.rubyforge.org/projects/ms-xcalibur/"
@@ -9,9 +9,10 @@ Gem::Specification.new do |s|
   s.require_path = "lib"
   s.rubyforge_project = "mspire"
   s.has_rdoc = true
-  s.add_dependency("configurable", ">= 0.4.2")
-  s.add_dependency("tap", ">= 0.12.4")
+  s.add_dependency("tap", ">= 0.17.0")
+  s.add_dependency("tap-tasks", ">= 0.2.0")
   s.add_dependency("constants", ">= 0.1")
+  s.add_development_dependency("tap-test", ">= 0.1.0")
   
   # list extra rdoc files like README here.
   s.extra_rdoc_files = %W{

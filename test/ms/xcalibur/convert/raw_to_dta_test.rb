@@ -2,7 +2,8 @@ require File.join(File.dirname(__FILE__), '../../../tap_test_helper.rb')
 require 'ms/xcalibur/convert/raw_to_dta'
 
 class RawToDtaTest < Test::Unit::TestCase
-  acts_as_tap_test :directories => {:output => 'output'}
+  acts_as_tap_test
+  acts_as_subset_test
   
   unless match_platform?("mswin")
     skip_test("Only available on Windows.")
@@ -42,7 +43,7 @@ class RawToDtaTest < Test::Unit::TestCase
   #
   
   def input_file
-    ctr.filepath(:root, "T29K_620.9@cid33_080703140516.raw")
+    ctr.path(:root, "T29K_620.9@cid33_080703140516.raw")
   end
   
   def test_raw_to_dta_with_default_options
