@@ -28,8 +28,8 @@ module Ms
     class Peakify < Tap::Tasks::FileTask
 
       config :point_char, '.'                          # A character used for each intensity point
-      config :min, 0, &c.num                           # Min relative intenisty
-      config :max, 100, &c.num                         # Max relative intenisty
+      config :min, 0, &c.numeric                       # Min relative intenisty
+      config :max, 100, &c.numeric                     # Max relative intenisty
       config :sort, false, &c.flag                     # Sort by intensity
       config :output, $stdout, &c.io(:<<, :binmode)    # The output file
 

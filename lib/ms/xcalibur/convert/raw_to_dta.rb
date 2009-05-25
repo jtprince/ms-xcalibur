@@ -33,9 +33,9 @@ module Ms
         config :extract_msn, 'C:\Xcalibur\System\Programs\extract_msn.exe' # The full path to the extract_msn executable
         config :first_scan, nil, :short => :F, &c.integer_or_nil
         config :last_scan, nil, :short => :L, &c.integer_or_nil
-        config :lower_MW, nil, :short => :B, &c.num_or_nil
-        config :upper_MW, nil, :short => :T, &c.num_or_nil
-        config :precursor_mass_tol, 1.4, :short => :M, &c.num
+        config :lower_MW, nil, :short => :B, &c.numeric_or_nil
+        config :upper_MW, nil, :short => :T, &c.numeric_or_nil
+        config :precursor_mass_tol, 1.4, :short => :M, &c.numeric
         config :num_allowed_intermediate_scans_for_grouping, 1, :short => :S, &c.integer
         config :charge_state, nil, :short => :C, &c.integer_or_nil
         config :num_required_group_scans, 1, :short => :G, &c.integer_or_nil
@@ -47,7 +47,7 @@ module Ms
         config :perform_charge_calculations, nil, :short => :K, &c.flag
         config :template_file, nil, :short => :O
         config :options_string, nil, :short => :A
-        config :minimum_signal_to_noise, 3, :short => :R, &c.num
+        config :minimum_signal_to_noise, 3, :short => :R, &c.numeric
         config :minimum_number_of_peaks, 5, :short => :r, &c.integer
         
         config :output_dir, nil, &c.string_or_nil # The output directory

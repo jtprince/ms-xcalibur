@@ -48,7 +48,7 @@ module Ms
 
         # Returns the unrounded mass of a proton (H - e) as calculated
         # from the {constants}[bioactive.rubyforge.org/constants] gem.
-        config :proton_mass, Element['H'].mass - Particle['Electron'].mass, &c.num_or_nil # Specify the proton mass
+        config :proton_mass, Element['H'].mass - Particle['Electron'].mass, &c.numeric_or_nil # Specify the proton mass
         config :output, $stdout, &c.io(:<<, :binmode) # The output file
         
         def process(*dta_files)
